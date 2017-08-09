@@ -33,19 +33,12 @@ RUN JQ_URL=$(curl --location --fail --retry 3 https://api.github.com/repos/stedo
 
 # Install Docker
 
-# Docker.com returns the URL of the latest binary when you hit a directory listing
+# https://download.docker.com/linux/static/stable/x86_64/ returns the URL of the latest binary when you hit the directory
 # We curl this URL and `grep` the version out.
-# The output looks like this:
-
-#>    # To install, run the following commands as root:
-#>    curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.05.0-ce.tgz && tar --strip-components=1 -xvzf docker-17.05.0-ce.tgz -C /usr/local/bin
-#>
-#>    # Then start docker in daemon mode:
-#>    /usr/local/bin/dockerd
 
 RUN set -ex \
-  && export DOCKER_VERSION=$(curl --silent --fail --retry 3 https://get.docker.com/builds/  | grep -P -o 'docker-\d+\.\d+\.\d+-ce\.tgz' | head -n 1) \
-  && DOCKER_URL="https://get.docker.com/builds/Linux/x86_64/${DOCKER_VERSION}" \
+  && export DOCKER_VERSION=$(curl --silent --fail --retry 3 https://download.docker.com/linux/static/stable/x86_64/  | grep -P -o 'docker-\d+\.\d+\.\d+-ce\.tgz' | head -n 1) \
+  && DOCKER_URL="https://download.docker.com/linux/static/stable/x86_64/${DOCKER_VERSION}" \
   && echo Docker URL: $DOCKER_URL \
   && curl --silent --show-error --location --fail --retry 3 --output /tmp/docker.tgz "${DOCKER_URL}" \
   && ls -lha /tmp/docker.tgz \
@@ -74,7 +67,7 @@ USER circleci
 # Setup NVM Install Environment
 # ...
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 8.2.0
+ENV NODE_VERSION 8.2.1
 ENV NPM_VERSION=5
 
 USER root
