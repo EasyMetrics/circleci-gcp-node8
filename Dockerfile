@@ -6,7 +6,7 @@ USER root
 # Install and Configure Google Cloud SDK
 # ...
 
-ENV CLOUD_SDK_VERSION 167.0.0
+ENV CLOUD_SDK_VERSION 177.0.0
 
 RUN apt-get -qqy update && apt-get install -qqy \
         curl \
@@ -101,8 +101,8 @@ USER circleci
 # Setup NVM Install Environment
 # ...
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 8.9.0
-ENV NPM_VERSION=5
+ENV NODE_VERSION 8.9.1
+#ENV NPM_VERSION=5
 
 USER root
 
@@ -127,7 +127,7 @@ USER circleci
 ENV NVM_DIR /usr/local/nvm
 
 # Install nvm with node and npm
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash \
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash \
     && source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
