@@ -1,4 +1,5 @@
-FROM debian:wheezy
+FROM debian:jessie
+
 MAINTAINER EasyMetrics <joshuaw@easymetrics.com>
 
 USER root
@@ -6,7 +7,7 @@ USER root
 # Install and Configure Google Cloud SDK
 # ...
 
-ENV CLOUD_SDK_VERSION 177.0.0
+ENV CLOUD_SDK_VERSION 178.0.0
 
 RUN apt-get -qqy update && apt-get -qqy upgrade && apt-get install -qqy \
         curl \
