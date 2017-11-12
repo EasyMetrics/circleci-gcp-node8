@@ -8,7 +8,7 @@ USER root
 
 ENV CLOUD_SDK_VERSION 177.0.0
 
-RUN apt-get -qqy update && apt-get install -qqy \
+RUN apt-get -qqy update && apt-get -qqy upgrade && apt-get install -qqy \
         curl \
         gcc \
         python-dev \
